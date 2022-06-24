@@ -7,7 +7,7 @@ export function Header() {
       <Content>
         <img src={logoImg} alt="MRV" />
         <button type="button">
-          Nova lead
+          New invite
         </button>
       </Content>
     </Container>
