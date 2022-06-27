@@ -62,7 +62,7 @@ export default function LeadCard({ lead, isAccepted }: LeadData) {
       <Line />
       <CardContent>
         <Container>
-          <Typography variant="body2" color="text.secondary">
+          <Typography component={'span'} variant="body2" color="text.secondary">
             <Info>
               <FaLocationArrow />
               {lead.leadSuburb}
@@ -90,18 +90,18 @@ export default function LeadCard({ lead, isAccepted }: LeadData) {
       <CardContent>
         {isAccepted && (
           <CardContact>
-            <Typography variant="body2" color="text.secondary">
+            <Typography component={'span'} variant="body2" color="text.secondary">
               <FaPhone />
               {lead.leadPhoneNumber}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography component={'span'} variant="body2" color="text.secondary">
               <FaEnvelope />
               {lead.leadEmailAddress}
             </Typography>
           </CardContact>
         )}
         <CardDescription>
-          <Typography variant="body2" color="text.secondary">
+          <Typography component={'span'} variant="body2" color="text.secondary">
             {lead.leadDescription}
           </Typography>
         </CardDescription>

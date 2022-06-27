@@ -25,7 +25,7 @@ export const CardDescription = styled.div`
 
 export const CardContact = styled.div`
   display: flex;
-  p {
+  span {
     margin-right: .5rem;
     color: var(--california);
     font-weight: 600;
