@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Header } from "./components/Header";
 import { Dashboard } from "./components/Dashboard";
 import { NewInviteModal } from "./components/NewInviteModal";
-import { InvitesProvider } from "./LeadsContext";
+import { InvitesProvider } from "./hooks/useLeads";
 
 export function App() {
   const [isNewInviteModalOpen, setIsNewInviteModalOpen] = useState(false);

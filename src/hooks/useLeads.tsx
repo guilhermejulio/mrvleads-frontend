@@ -1,7 +1,7 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
-import { api } from "./services/api";
-import { Lead } from "./models/Lead";	
-import { Statistics } from "./models/Statistics";	
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { api } from "../services/api";
+import { Lead } from "../models/Lead";	
+import { Statistics } from "../models/Statistics";	
 
 type LeadInput = Omit<Lead, "leadId" | "leadFullName"| "leadCreatedAt" | "leadUpdatedAt"| "statusId"| "statusName">;
 
@@ -14,9 +14,10 @@ interface InvitesContextData {
   leadsAccepted: Lead[];
   statistics: Statistics;
   createInvite: (lead: LeadInput) => Promise<void>;
+  acceptLead: (leadId: number) => Promise<void>;
 }
 
-export const InvitesContext = createContext<InvitesContextData>(
+const InvitesContext = createContext<InvitesContextData>(
   {} as InvitesContextData
 );
 
@@ -49,6 +50,16 @@ export function InvitesProvider({ children }: InvitesProviderProps) {
     getStatistics();
   }
 
+  async function acceptLead(leadId: number) {
+    const response = await api.put(`/leads/UpdateStatus/accept/${leadId}`);
+    const acceptedLead = response.data;
+
+    const newLeads = [...leadsInvited.filter((lead) => lead.leadId !== leadId)];
+    setLeads(newLeads);
+    setLeadsAccepted([acceptedLead, ...leadsAccepted]);
+    getStatistics();
+  }
+
   async function getStatistics() {
     const response = await api.get("/leads/GetStatistics");
     const statistic: Statistics = response.data;
@@ -57,8 +68,15 @@ export function InvitesProvider({ children }: InvitesProviderProps) {
   }
 
   return (
-    <InvitesContext.Provider value={{ leadsInvited, leadsAccepted, statistics, createInvite}}>
+    <InvitesContext.Provider value={{ leadsInvited, leadsAccepted, statistics, createInvite, acceptLead}}>
       {children}
     </InvitesContext.Provider>
   );
+}
+
+
+export function useLeads() {
+  const context = useContext(InvitesContext);
+
+  return context;
 }

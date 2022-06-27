@@ -2,10 +2,10 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Container } from "./styles";
 import  LeadCard from "../LeadCard";
-import { InvitesContext } from "../../LeadsContext";
+import { useLeads } from "../../hooks/useLeads";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -41,7 +41,7 @@ function a11yProps(index: number) {
 }
 
 export default function LeadsTabs() {
-  const { leadsInvited, leadsAccepted } = useContext(InvitesContext);
+  const { leadsInvited, leadsAccepted } = useLeads();
   const [tab, setTab] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newTab: number) => {

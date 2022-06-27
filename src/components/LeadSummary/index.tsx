@@ -1,10 +1,9 @@
 import { Container } from "./styles";
 import { FaRegArrowAltCircleDown, FaRegTimesCircle, FaThumbsUp } from "react-icons/fa";
-import { useContext } from "react";
-import { InvitesContext } from "../../LeadsContext";
+import { useLeads } from "../../hooks/useLeads";
 
 export function LeadSummary() {
-  const { statistics } = useContext(InvitesContext);
+  const { statistics } = useLeads();
 
   return (
       <Container>

@@ -1,8 +1,8 @@
 import { Container } from "./styles";
 import Modal from "react-modal";
 import closeImg from "../../assets/close.svg";
-import { FormEvent, useState, useContext } from "react";
-import { InvitesContext } from "../../LeadsContext";
+import { FormEvent, useState } from "react";
+import { useLeads } from "../../hooks/useLeads";
 
 interface NewInviteModalProps {
   isOpen: boolean;
@@ -15,7 +15,7 @@ export function NewInviteModal({
   isOpen,
   onRequestClose,
 }: NewInviteModalProps) {
-  const { createInvite } = useContext(InvitesContext);
+  const { createInvite } = useLeads();
   const [leadFirstName, setFirstName] = useState("");
   const [leadLastName, setLastName] = useState("");
   const [leadSuburb, setSuburb] = useState("");

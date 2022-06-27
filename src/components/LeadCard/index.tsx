@@ -21,6 +21,7 @@ import {
 } from "react-icons/fa";
 import { DateTime } from "luxon";
 import { Lead } from "../../models/Lead";
+import { useLeads } from "../../hooks/useLeads";
 
 interface LeadData {
   lead: Lead;
@@ -28,6 +29,11 @@ interface LeadData {
 }
 
 export default function LeadCard({ lead, isAccepted }: LeadData) {
+  const { acceptLead } = useLeads();
+
+  async function handleAccept() {
+    await acceptLead(lead.leadId);
+  }
   return (
     <Card sx={{ maxWidth: 1120, marginTop: 2 }}>
       <CardHeader
@@ -101,7 +107,7 @@ export default function LeadCard({ lead, isAccepted }: LeadData) {
           <Line />
           <CardContent>
             <Bottom>
-              <Button variant="contained">Accept</Button>
+              <Button variant="contained" onClick={handleAccept}>Accept</Button>
               <Button variant="outlined">Decline</Button>
               <Info>
                 <Price>
