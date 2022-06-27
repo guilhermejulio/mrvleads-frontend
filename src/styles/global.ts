@@ -14,6 +14,8 @@ export const GlobalStyle = createGlobalStyle`
 
     --text-title: #363f5f;
     --text-body: #969cb3;
+
+    --neon-red: #b92e34
   }
   * {
     margin: 0;

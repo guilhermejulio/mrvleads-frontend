@@ -22,6 +22,14 @@ export const Container = styled.div`
         height: 1.5rem;
       }
 
+      .invite-icon-summary {
+        fill: var(--fun-green-mix);
+      }
+      
+      .declined-icon-summary {
+        fill: var(--neon-red)
+      }
+
     }
 
     strong {

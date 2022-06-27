@@ -10,21 +10,21 @@ export function LeadSummary() {
         <div>
           <header>
             <p>Invited Leads</p>
-            <FaRegArrowAltCircleDown />
+            <FaRegArrowAltCircleDown className="invite-icon-summary"/>
           </header>
           <strong>{statistics.inviteLeads}</strong>
         </div>
         <div>
           <header>
             <p>Declined Leads</p>
-            <FaRegTimesCircle />
+            <FaRegTimesCircle className="declined-icon-summary" />
           </header>
           <strong>{statistics.rejectLeads}</strong>
         </div>
         <div className="hightlight-background">
           <header>
             <p>Accepted Leads</p>
-            <FaThumbsUp />
+            <FaThumbsUp className="accepted-icon-summary" />
           </header>
           <strong>{statistics.acceptedLeads}</strong>
         </div>
