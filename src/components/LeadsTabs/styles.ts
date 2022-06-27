@@ -5,4 +5,7 @@ export const Container = styled.div`
   .MuiTabs-indicator {
     background-color: var(--california);
   }
+  .MuiBox-root {
+    border: none;
+  }
 `;

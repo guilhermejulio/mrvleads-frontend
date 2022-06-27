@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Header } from "./components/Header";
 import { Dashboard } from "./components/Dashboard";
 import { NewInviteModal } from "./components/NewInviteModal";
+import { InvitesProvider } from "./LeadsContext";
 
 export function App() {
   const [isNewInviteModalOpen, setIsNewInviteModalOpen] = useState(false);
@@ -16,7 +17,7 @@ export function App() {
   }
   
   return (
-    <>
+    <InvitesProvider>
       <Header onOpenNewInviteModal={handleOpenNewInviteModal} />
       <Dashboard />
       <NewInviteModal 
@@ -24,7 +25,7 @@ export function App() {
         onRequestClose={handleCloseNewInviteModal}
       />
       <GlobalStyle />
-    </>
+    </InvitesProvider>
   );
 }
 

@@ -2,10 +2,10 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Container } from "./styles";
-import Lead from "../Lead";
-import { api } from "../../services/api";
+import  LeadCard from "../LeadCard";
+import { InvitesContext } from "../../LeadsContext";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -41,14 +41,11 @@ function a11yProps(index: number) {
 }
 
 export default function LeadsTabs() {
-  useEffect(() => {
-    api.get('/leads/listall')
-      .then(response => console.log(response.data))
-  }, []);
-  const [value, setValue] = useState(0);
+  const { leadsInvited, leadsAccepted } = useContext(InvitesContext);
+  const [tab, setTab] = useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+  const handleChange = (event: React.SyntheticEvent, newTab: number) => {
+    setTab(newTab);
   };
 
   return (
@@ -56,7 +53,7 @@ export default function LeadsTabs() {
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider", '&.MuiTabs-indicator': { backgroundColor: "#FB9E04"} }}>
           <Tabs
-            value={value}
+            value={tab}
             onChange={handleChange}
             centered
           >
@@ -64,11 +61,15 @@ export default function LeadsTabs() {
             <Tab sx={{ fontWeight: 600, '&.Mui-selected': { color: "#FB9E04"} }} label="Accepted" {...a11yProps(1)} />
           </Tabs>
         </Box>
-        <TabPanel value={value} index={0}>
-          <Lead />
+        <TabPanel value={tab} index={0}>
+          {leadsInvited.map(lead => (
+            <LeadCard key={lead.leadId} lead={lead} isAccepted={false} />
+          ))}
         </TabPanel>
-        <TabPanel value={value} index={1}>
-          Nothing here...
+        <TabPanel value={tab} index={1}>
+          {leadsAccepted.map(lead => (
+              <LeadCard key={lead.leadId} lead={lead} isAccepted={true} />
+          ))}
         </TabPanel>
       </Box>
     </Container>
