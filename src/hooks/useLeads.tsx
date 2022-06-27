@@ -15,6 +15,7 @@ interface InvitesContextData {
   statistics: Statistics;
   createInvite: (lead: LeadInput) => Promise<void>;
   acceptLead: (leadId: number) => Promise<void>;
+  declineLead: (leadId: number) => Promise<void>;
 }
 
 const InvitesContext = createContext<InvitesContextData>(
@@ -60,6 +61,14 @@ export function InvitesProvider({ children }: InvitesProviderProps) {
     getStatistics();
   }
 
+  async function declineLead(leadId: number) {
+    await api.put(`/leads/UpdateStatus/decline/${leadId}`);
+
+    const newLeads = [...leadsInvited.filter((lead) => lead.leadId !== leadId)];
+    setLeads(newLeads);
+    getStatistics();
+  }
+
   async function getStatistics() {
     const response = await api.get("/leads/GetStatistics");
     const statistic: Statistics = response.data;
@@ -68,7 +77,7 @@ export function InvitesProvider({ children }: InvitesProviderProps) {
   }
 
   return (
-    <InvitesContext.Provider value={{ leadsInvited, leadsAccepted, statistics, createInvite, acceptLead}}>
+    <InvitesContext.Provider value={{ leadsInvited, leadsAccepted, statistics, createInvite, acceptLead, declineLead}}>
       {children}
     </InvitesContext.Provider>
   );

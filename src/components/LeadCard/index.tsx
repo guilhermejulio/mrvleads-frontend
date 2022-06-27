@@ -29,10 +29,14 @@ interface LeadData {
 }
 
 export default function LeadCard({ lead, isAccepted }: LeadData) {
-  const { acceptLead } = useLeads();
+  const { acceptLead, declineLead } = useLeads();
 
   async function handleAccept() {
     await acceptLead(lead.leadId);
+  }
+
+  async function handleDecline() {
+    await declineLead(lead.leadId);
   }
   return (
     <Card sx={{ maxWidth: 1120, marginTop: 2 }}>
@@ -108,7 +112,7 @@ export default function LeadCard({ lead, isAccepted }: LeadData) {
           <CardContent>
             <Bottom>
               <Button variant="contained" onClick={handleAccept}>Accept</Button>
-              <Button variant="outlined">Decline</Button>
+              <Button variant="outlined" onClick={handleDecline}>Decline</Button>
               <Info>
                 <Price>
                   {new Intl.NumberFormat("en-US", {
