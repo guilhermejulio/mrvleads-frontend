@@ -16,7 +16,7 @@ export function LeadSummary() {
         </div>
         <div>
           <header>
-            <p>Rejected Leads</p>
+            <p>Declined Leads</p>
             <FaRegTimesCircle />
           </header>
           <strong>{statistics.rejectLeads}</strong>
